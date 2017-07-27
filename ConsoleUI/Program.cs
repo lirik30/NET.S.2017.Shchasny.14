@@ -26,10 +26,6 @@ namespace ConsoleUI
             {
                 Console.WriteLine(elem);
             }
-
-
-            Console.WriteLine($"{set.FindFirstOrDefault((x) => x.Length == 5)} -> length == 5");
-
             Console.ReadKey();
         }
     }

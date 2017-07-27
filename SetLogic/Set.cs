@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace SetLogic
 {
+    /// <summary>
+    /// Generalized class-collection Set
+    /// </summary>
+    /// <typeparam name="T">Variable of reference type with comparison semantics by value</typeparam>
     public class Set<T> : IEnumerable<T> where T : class, IEquatable<T>
     {
         #region private fields
-
+        
         private Node<T> _startSentinel;
         private Node<T> _endSentinel;
         private int _size;
@@ -43,15 +47,36 @@ namespace SetLogic
                     return i;
             return null;
         }
+
+        private void Add(T valueToAdd, Node<T> addAfterThat)
+        {
+            if (ReferenceEquals(valueToAdd, null))
+                throw new ArgumentNullException($"{nameof(valueToAdd)} must be not null");
+
+            if (ReferenceEquals(addAfterThat, null))
+                throw new InvalidOperationException();
+
+            var toAdd = new Node<T>(valueToAdd, addAfterThat.Next, addAfterThat);
+            addAfterThat.Next.Prev = toAdd;
+            addAfterThat.Next = toAdd;
+            _size++;
+        }
         #endregion
 
         #region ctors
 
+        /// <summary>
+        /// Create empty set
+        /// </summary>
         public Set()
         {
             Initialization();
         }
 
+        /// <summary>
+        /// Create set from any other collection
+        /// </summary>
+        /// <param name="collection"></param>
         public Set(IEnumerable<T> collection)
         {
             Initialization();
@@ -63,42 +88,44 @@ namespace SetLogic
 
         #region public methods
 
-        public void Add(T value) => Add(value, _endSentinel.Prev);
+        /// <summary>
+        /// Add element in the ending of the set
+        /// </summary>
+        /// <param name="value">Element for adding</param>
+        public void Add(T value) => Add(value, LastNode);
 
-        private void Add(T valueToAdd, Node<T> addAfterThat)
-        {
-            if(ReferenceEquals(valueToAdd, null))
-                throw new ArgumentNullException($"{nameof(valueToAdd)} must be not null");
-
-            var toAdd = new Node<T>(valueToAdd, addAfterThat.Next, addAfterThat);
-            addAfterThat.Next.Prev = toAdd;
-            addAfterThat.Next = toAdd;
-            _size++;
-        }
-
+        /// <summary>
+        /// Add element after any other element(if it exists) in the set
+        /// </summary>
+        /// <param name="valueToSearch">Insert after that element</param>
+        /// <param name="valueToAdd">Element for adding</param>
         public void AddAfter(T valueToSearch, T valueToAdd)
         {
             var addAfterThat = Search(valueToSearch);
-
-            if (ReferenceEquals(addAfterThat, null))
-                throw new InvalidOperationException();
-
             Add(valueToAdd, addAfterThat);
         }
 
+        /// <summary>
+        /// Add element before any other element(if it exists) in the set
+        /// </summary>
+        /// <param name="valueToSearch">Insert before that element</param>
+        /// <param name="valueToAdd">Element for adding</param>
         public void AddBefore(T valueToSearch, T valueToAdd)
         {
             var addBeforeThat = Search(valueToSearch);
-
-            if (ReferenceEquals(addBeforeThat, null))
-                throw new InvalidOperationException();
-
             Add(valueToAdd, addBeforeThat.Prev);
         }
 
-
+        /// <summary>
+        /// Add element in the beginning of the set
+        /// </summary>
+        /// <param name="value">Element for adding</param>
         public void AddInTheBeginning(T value) => Add(value, _startSentinel);
 
+        /// <summary>
+        /// Remove element in the set, if it exists
+        /// </summary>
+        /// <param name="value">Element for removing</param>
         public void Remove(T value)
         {
             var toDelete = Search(value);
@@ -110,9 +137,6 @@ namespace SetLogic
             toDelete.Next.Prev = toDelete.Prev;
             _size--;
         }
-
-        public T FindFirstOrDefault(Predicate<T> predicate) => this.FirstOrDefault(elem => predicate(elem));
-
         #endregion
 
         #region GetEnumeratorы
