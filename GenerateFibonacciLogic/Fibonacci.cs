@@ -15,17 +15,23 @@ namespace GenerateFibonacciLogic
         /// <returns>Collection of Fibonacci numbers</returns>
         public static IEnumerable<int> GenerateFibonacci(int count)
         {
-            int a = 1;
-            yield return a;
+            if(count < 0)
+                throw new ArgumentOutOfRangeException();
+
+            if (count == 0)
+                yield break;
+
+            int a = -1;
             int b = 1;
-            yield return b;
-            for (int i = 0; i < count - 2; i++)
+            for (int i = 0; i < count; i++)
             {
                 yield return a + b;
                 int temp = a;
                 a = b;
                 b = temp + b;
             }
+
+
         }
     }
 }

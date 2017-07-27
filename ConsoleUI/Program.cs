@@ -11,7 +11,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            foreach (var fib in GenerateFibonacci(20))
+            foreach (var fib in GenerateFibonacci(12))
             {
                 Console.WriteLine(fib);
             }
