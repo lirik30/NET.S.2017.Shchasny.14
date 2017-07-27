@@ -1,8 +1,8 @@
 c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\ConsoleUI.exe.config
 c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\ConsoleUI.exe
 c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\ConsoleUI.pdb
-c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\GenerateFibonacciLogic.dll
-c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\GenerateFibonacciLogic.pdb
 c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\obj\Debug\ConsoleUI.csprojResolveAssemblyReference.cache
 c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\obj\Debug\ConsoleUI.exe
 c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\obj\Debug\ConsoleUI.pdb
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\SetLogic.dll
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\SetLogic.pdb
