@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUI", "ConsoleUI\Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetLogic", "SetLogic\SetLogic.csproj", "{9504D400-CE0B-485A-BE5F-F022877B398B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixLogic", "MatrixLogic\MatrixLogic.csproj", "{BAB9BFBB-ED05-4763-B22F-8B0DED8EB517}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9504D400-CE0B-485A-BE5F-F022877B398B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9504D400-CE0B-485A-BE5F-F022877B398B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9504D400-CE0B-485A-BE5F-F022877B398B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAB9BFBB-ED05-4763-B22F-8B0DED8EB517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAB9BFBB-ED05-4763-B22F-8B0DED8EB517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAB9BFBB-ED05-4763-B22F-8B0DED8EB517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAB9BFBB-ED05-4763-B22F-8B0DED8EB517}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
