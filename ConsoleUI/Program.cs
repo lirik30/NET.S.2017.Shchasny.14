@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using MatrixLogic;
 
 namespace ConsoleUI
@@ -36,11 +37,40 @@ namespace ConsoleUI
             //Console.WriteLine();
             //Console.WriteLine(dMatrix);
 
+            var sqMatrix1 = new Matrix<double>(3, 3);
+            var sqMatrix2 = new SquareMatrix<double>(3);
+
+            sqMatrix1.SetElement(2.0,0,0);
+            sqMatrix1.SetElement(7.5, 1, 0);
+            sqMatrix1.SetElement(2.1, 0, 1);
+            sqMatrix1.SetElement(5.0, 0, 2);
+            sqMatrix1.SetElement(4.0, 2, 0);
+            sqMatrix1.SetElement(1.0, 1, 1);
+            sqMatrix1.SetElement(2.0, 2, 1);
+
+
+
+            var sqMatrix = sqMatrix1 + sqMatrix2;
+            Console.WriteLine(sqMatrix);
+
+
             Console.ReadKey();
         }
+
+
+
+
+        //public static T Add<T>(T lhs, T rhs)
+        //{
+        //    ParameterExpression paramA = Expression.Parameter(typeof(T), "elem1"),
+        //                        paramB = Expression.Parameter(typeof(T), "elem2");
+        //    BinaryExpression body = Expression.Add(paramA, paramB);
+        //    Func<T, T, T> add = Expression.Lambda<Func<T, T, T>>(body, paramA, paramB).Compile();
+        //    return add(lhs, rhs);
+        //}
     }
 
-
+    
 
     class Listener<T>
     {

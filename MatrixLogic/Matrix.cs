@@ -1,4 +1,6 @@
 ﻿using System;
+using System.CodeDom;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace MatrixLogic
@@ -72,6 +74,47 @@ namespace MatrixLogic
             OnIndexChanged(new ElementChangedEventArgs(value, oldValue, row, column));
         }
 
+
+        /// <summary>
+        /// Addition of matrices
+        /// </summary>
+        /// <param name="lhs">First matrix</param>
+        /// <param name="rhs">Second matrix</param>
+        /// <returns>Result matrix</returns>
+        public static Matrix<T> operator +(Matrix<T> lhs, Matrix<T> rhs)
+        {
+            if(lhs.ColumnsCount != rhs.ColumnsCount || lhs.RowsCount != rhs.RowsCount)
+                throw new InvalidOperationException();
+
+            var result = new Matrix<T>(lhs.RowsCount, lhs.ColumnsCount);
+            for(int i = 0; i < result.RowsCount; i++)
+                for (int j = 0; j < result.ColumnsCount; j++)
+                {
+                    T elem = Add(lhs.GetElement(i, j), rhs.GetElement(i, j));
+                    result.SetElement(elem, i, j);
+                }
+            return result;
+        }
+
+        /// <summary>
+        /// Addition of matrices
+        /// </summary>
+        /// <param name="lhs">First matrix</param>
+        /// <param name="rhs">Second matrix</param>
+        /// <returns>Result matrix</returns>
+        public Matrix<T> Add(Matrix<T> lhs, Matrix<T> rhs) => lhs + rhs;
+
+        /// <summary>
+        /// Addition of two elements
+        /// </summary>
+        protected static T Add(T lhs, T rhs)
+        {
+            ParameterExpression paramA = Expression.Parameter(typeof(T), "elem1"),
+                                paramB = Expression.Parameter(typeof(T), "elem2");
+            BinaryExpression body = Expression.Add(paramA, paramB);
+            Func<T, T, T> add = Expression.Lambda<Func<T, T, T>>(body, paramA, paramB).Compile();
+            return add(lhs, rhs);
+        }
 
         protected virtual void OnIndexChanged(ElementChangedEventArgs eventArgs)
         {
