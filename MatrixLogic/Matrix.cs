@@ -41,8 +41,7 @@ namespace MatrixLogic
             _matrix = new T[nRows, nCols];
             _nRows = nRows;
             _nCols = nCols;
-        }
-
+        }   
 
         /// <summary>
         /// Get element by indexes

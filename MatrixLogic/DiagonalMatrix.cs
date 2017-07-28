@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace MatrixLogic
 {
+    /// <summary>
+    /// Class provides methods for work with diagonal matrix
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public sealed class DiagonalMatrix<T> : SquareMatrix<T>
     {
         private T[] _matrix;
@@ -19,6 +23,12 @@ namespace MatrixLogic
             _matrix = new T[n];
         }
 
+        /// <summary>
+        /// Get element by indexes
+        /// </summary>
+        /// <param name="row">Row index</param>
+        /// <param name="column">Column index</param>
+        /// <returns>Element from matrix</returns>
         public override T GetElement(int row, int column)
         {
             if (row > Order || column > Order || row < 0 || column < 0)

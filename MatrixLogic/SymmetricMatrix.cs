@@ -3,7 +3,7 @@
 namespace MatrixLogic
 {
     /// <summary>
-    /// Class provides method for work with symmetric matrix
+    /// Class provides methods for work with symmetric matrix
     /// </summary>
     /// <typeparam name="T">Type of element</typeparam>
     public sealed class SymmetricMatrix<T> : SquareMatrix<T>
