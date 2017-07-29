@@ -38,7 +38,7 @@ namespace ConsoleUI
             //Console.WriteLine(dMatrix);
 
             var sqMatrix1 = new Matrix<double>(3, 3);
-            var sqMatrix2 = new SquareMatrix<double>(3);
+            var sqMatrix2 = new DiagonalMatrix<double>(3);
 
             sqMatrix1.SetElement(2.0,0,0);
             sqMatrix1.SetElement(7.5, 1, 0);

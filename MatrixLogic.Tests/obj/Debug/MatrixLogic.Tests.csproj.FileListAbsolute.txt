@@ -1,0 +1,9 @@
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\MatrixLogic.Tests\bin\Debug\MatrixLogic.Tests.dll
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\MatrixLogic.Tests\bin\Debug\MatrixLogic.Tests.pdb
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\MatrixLogic.Tests\bin\Debug\MatrixLogic.dll
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\MatrixLogic.Tests\bin\Debug\nunit.framework.dll
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\MatrixLogic.Tests\bin\Debug\MatrixLogic.pdb
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\MatrixLogic.Tests\bin\Debug\nunit.framework.xml
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\MatrixLogic.Tests\obj\Debug\MatrixLogic.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\MatrixLogic.Tests\obj\Debug\MatrixLogic.Tests.dll
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\MatrixLogic.Tests\obj\Debug\MatrixLogic.Tests.pdb

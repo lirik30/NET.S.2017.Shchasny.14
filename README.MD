@@ -9,15 +9,16 @@ A generalized collection class Set that allows you to work only with reference v
  - void AddAfter(T, T):       add element after any other element(if it exists) in the set;
  - void AddBefore(T, T):      add element before any other element(if it exists) in the set;
  - void AddInTheBeginning(T): add element in the beginning of the set;
- - void Remove(T):            remove element in the set, if it exists;
+ - void Remove(T):            remove element in the set, if it exists.
 
 Class realize IEnumerable<T> interface. This allows you to iterate through the collection and use LINQ-queries.
 
 # Matrix<T>
 Class provides methods for representation of matrix:
- - T GetElement(int, int):       get element by indexes of row and column
- - void SetElement(T, int, int): set element by indexes of row and column
- - string ToString():            get string representation of the matrix
+ - T GetElement(int, int):       get element by indexes of row and column;
+ - void SetElement(T, int, int): set element by indexes of row and column;
+ - string ToString():            get string representation of the matrix;
+ - Matrix<T> operator+(Matrix<T>, Matrix<T>) : possibility to get the sum of two matrices.
 
 Properties:
  - int RowsCount:    rows count in the matrix

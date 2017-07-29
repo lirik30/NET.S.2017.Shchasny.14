@@ -20,28 +20,28 @@ namespace MatrixLogic
         }
 
         /// <summary>
-        /// Get element by indexes
+        /// Get element by indices
         /// </summary>
         /// <param name="row">Row index</param>
         /// <param name="column">Column index</param>
         /// <returns>Element from matrix</returns>
         public override T GetElement(int row, int column)
         {
-            if (row > Order || column > Order || row < 0 || column < 0)
+            if (row >= Order || column >= Order || row < 0 || column < 0)
                 throw new ArgumentOutOfRangeException();
             if (column > row) return GetElement(column, row);
             return _matrix[(row * row + row) / 2 + column];
         }
 
         /// <summary>
-        /// Set element by indexes
+        /// Set element by indices
         /// </summary>
         /// <param name="value">Value to set</param>
         /// <param name="row">Row index</param>
         /// <param name="column">Column index</param>
         public override void SetElement(T value, int row, int column)
         {
-            if (row > Order || column > Order || row < 0 || column < 0)
+            if (row >= Order || column >= Order || row < 0 || column < 0)
                 throw new ArgumentOutOfRangeException();
 
             T oldValue = GetElement(row, column);

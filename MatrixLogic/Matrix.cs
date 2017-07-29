@@ -46,28 +46,28 @@ namespace MatrixLogic
         }   
 
         /// <summary>
-        /// Get element by indexes
+        /// Get element by indices
         /// </summary>
         /// <param name="row">Row index</param>
         /// <param name="column">Column index</param>
         /// <returns>Element from matrix</returns>
         public virtual T GetElement(int row, int column)
         {
-            if(row > _nRows || column > _nCols || row < 0 || column < 0)
+            if(row >= _nRows || column >= _nCols || row < 0 || column < 0)
                 throw new ArgumentOutOfRangeException();
 
             return _matrix[row, column];
         }
 
         /// <summary>
-        /// Set element by indexes
+        /// Set element by indices
         /// </summary>
         /// <param name="value">Value to set</param>
         /// <param name="row">Row index</param>
         /// <param name="column">Column index</param>
         public virtual void SetElement(T value, int row, int column)
         {
-            if (row > _nRows || column > _nCols || row < 0 || column < 0)
+            if (row >= _nRows || column >= _nCols || row < 0 || column < 0)
                 throw new ArgumentOutOfRangeException();
             T oldValue = GetElement(row, column);
             _matrix[row, column] = value;
@@ -84,7 +84,7 @@ namespace MatrixLogic
         public static Matrix<T> operator +(Matrix<T> lhs, Matrix<T> rhs)
         {
             if(lhs.ColumnsCount != rhs.ColumnsCount || lhs.RowsCount != rhs.RowsCount)
-                throw new InvalidOperationException();
+                throw new InvalidOperationException($"{nameof(lhs)} and {nameof(rhs)} must be the same size");
 
             var result = new Matrix<T>(lhs.RowsCount, lhs.ColumnsCount);
             for(int i = 0; i < result.RowsCount; i++)
