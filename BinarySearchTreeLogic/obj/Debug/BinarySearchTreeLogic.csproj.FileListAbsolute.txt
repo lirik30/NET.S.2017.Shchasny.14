@@ -1,0 +1,5 @@
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\BinarySearchTreeLogic\bin\Debug\BinarySearchTreeLogic.dll
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\BinarySearchTreeLogic\bin\Debug\BinarySearchTreeLogic.pdb
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\BinarySearchTreeLogic\obj\Debug\BinarySearchTreeLogic.csprojResolveAssemblyReference.cache
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\BinarySearchTreeLogic\obj\Debug\BinarySearchTreeLogic.dll
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\BinarySearchTreeLogic\obj\Debug\BinarySearchTreeLogic.pdb
