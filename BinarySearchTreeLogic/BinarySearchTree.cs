@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace BinarySearchTreeLogic
 {
-    public class BinarySearchTree<T> : IEnumerable<T> where T : IComparable<T>
+    public class BinarySearchTree<T> : IEnumerable<T>
     {
         #region private fields
         private Node<T> _top;
         private int _size;
+        private IComparer<T> _comparer;
         #endregion
 
         #region property
@@ -18,14 +20,20 @@ namespace BinarySearchTreeLogic
 
         #region ctors
 
-        public BinarySearchTree(T element)
+        public BinarySearchTree(T element) : this(element, Comparer<T>.Default) { }
+
+        public BinarySearchTree(IEnumerable<T> elements) : this(elements, Comparer<T>.Default) { }
+
+        public BinarySearchTree(T element, IComparer<T> comparer)
         {
+            _comparer = comparer ?? Comparer<T>.Default;
             _top = new Node<T>(element, null, null);
         }
 
-        public BinarySearchTree(IEnumerable<T> elements)
+        public BinarySearchTree(IEnumerable<T> elements, IComparer<T> comparer)
         {
-            foreach ( var elem in elements)
+            _comparer = comparer ?? Comparer<T>.Default;
+            foreach (var elem in elements)
                 Add(elem);
         }
         #endregion
@@ -34,52 +42,47 @@ namespace BinarySearchTreeLogic
 
         private IEnumerable<T> TraversePreorder(Node<T> node)
         {
+            if(ReferenceEquals(node, null)) yield break;
+
             yield return node.Value;
-            //Console.WriteLine($"{node.Value} -> preorder");
-            if (!ReferenceEquals(node.LeftChild, null))
-                foreach (var elem in TraversePreorder(node.LeftChild))
-                {
-                    yield return elem;
-                }
-            if (!ReferenceEquals(node.RightChild, null))
-                foreach (var elem in TraversePreorder(node.RightChild))
-                {
-                    yield return elem;
-                }
+            
+            foreach (var elem in TraversePreorder(node.LeftChild))
+                yield return elem;
+            
+            foreach (var elem in TraversePreorder(node.RightChild))
+                yield return elem;
         }
 
         private IEnumerable<T> TraverseInorder(Node<T> node)
         {
-            if (!ReferenceEquals(node.LeftChild, null))
-                foreach (var elem in TraverseInorder(node.LeftChild))
-                {
-                    yield return elem;
-                }
+            if (ReferenceEquals(node, null)) yield break;
+
+            foreach (var elem in TraverseInorder(node.LeftChild))
+                yield return elem;
+
             yield return node.Value;
-            if (!ReferenceEquals(node.RightChild, null))
-                foreach (var elem in TraverseInorder(node.RightChild))
-                {
-                    yield return elem;
-                }
+            
+            foreach (var elem in TraverseInorder(node.RightChild))
+                yield return elem;
         }
 
         private IEnumerable<T> TraversePostorder(Node<T> node)
         {
-            if (!ReferenceEquals(node.LeftChild, null))
-                foreach (var elem in TraversePostorder(node.LeftChild))
-                {
-                    yield return elem;
-                }
-            if (!ReferenceEquals(node.RightChild, null))
-                foreach (var elem in TraversePostorder(node.RightChild))
-                {
-                    yield return elem;
-                }
+            if (ReferenceEquals(node, null)) yield break;
+
+            foreach (var elem in TraversePostorder(node.LeftChild))
+                yield return elem;
+            
+            foreach (var elem in TraversePostorder(node.RightChild))
+                yield return elem;
+
             yield return node.Value;
         }
         #endregion
 
         #region public methods
+
+        public bool Contains(T value) => Contains(_top, value);
 
         public void Add(T value)
         {
@@ -93,27 +96,28 @@ namespace BinarySearchTreeLogic
             _size++;
         }
 
-        public IEnumerable<T> TraversePreorder()
-        {
-            return TraversePreorder(_top);
-        }
+        public IEnumerable<T> TraversePreorder() => TraversePreorder(_top);
 
-        public IEnumerable<T> TraverseInorder()
-        {
-            return TraverseInorder(_top);
-        }
+        public IEnumerable<T> TraverseInorder() => TraverseInorder(_top);
 
-        public IEnumerable<T> TraversePostorder()
-        {
-            return TraversePostorder(_top);
-        }
+        public IEnumerable<T> TraversePostorder() => TraversePostorder(_top);
+
         #endregion
 
         #region private methods
 
-        private void AddNode(Node<T> node, T value)
+        private bool Contains(Node<T> node, T value)
         {
-            if (node.Value.CompareTo(value) > 0)
+            if (node == null) return false;
+
+            int cmp = _comparer.Compare(node.Value, value);
+            if (cmp == 0) return true;
+            return cmp > 0 ? Contains(node.LeftChild, value) : Contains(node.RightChild, value);
+        }
+
+        private void AddNode(Node<T> node, T value)//
+        {
+            if (_comparer.Compare(node.Value, value) > 0)
             {
                 if (ReferenceEquals(node.LeftChild, null))
                 {
@@ -132,6 +136,7 @@ namespace BinarySearchTreeLogic
                 AddNode(node.RightChild, value);
             }
         }
+        
 
         #endregion
 

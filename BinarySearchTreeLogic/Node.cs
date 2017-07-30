@@ -2,7 +2,7 @@
 
 namespace BinarySearchTreeLogic
 {
-    internal sealed class Node<T> where T : IComparable<T>
+    internal sealed class Node<T>
     {
         internal T Value { get; set; }
         internal Node<T> LeftChild { get; set; }
