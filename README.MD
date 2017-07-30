@@ -11,7 +11,7 @@ A generalized collection class Set that allows you to work only with reference v
  - void AddInTheBeginning(T): add element in the beginning of the set;
  - void Remove(T):            remove element in the set, if it exists.
 
-Class realize IEnumerable<T> interface. This allows you to iterate through the collection and use LINQ-queries.
+Class realize IEnumerable<T> interface. It allows you to iterate through the collection and use LINQ-queries.
 
 # Matrix<T>
 Class provides methods for representation of matrix:
@@ -28,3 +28,10 @@ This class provides with event that will happened when element in matrix is chan
 
 ### Square, symmetric and diagonal matrix
 This classes are derived from Matrix class. They have the same functionality, which differs only in the implementation and situations that are specific only for a particular type of matrix. For example, you cannot change element outside the diagonal in the diagonal matrix.
+
+# Binary search tree
+Class privide method for work with binary search tree:
+ - void Add(T): add element in the tree;
+ - bool Contains(T): return true.
+
+Class realize IEnumerable interface. Class also realize 3 method of tree bypass: preorder, inorder, postorder. Preorder method is default.

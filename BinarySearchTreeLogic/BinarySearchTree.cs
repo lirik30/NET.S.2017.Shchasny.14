@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
 
 namespace BinarySearchTreeLogic
 {
@@ -15,21 +13,42 @@ namespace BinarySearchTreeLogic
 
         #region property
 
+        /// <summary>
+        /// Count of elements in the tree
+        /// </summary>
         public int Size => _size;
         #endregion
 
         #region ctors
 
+        /// <summary>
+        /// Create root of the tree
+        /// </summary>
+        /// <param name="element">Root element</param>
         public BinarySearchTree(T element) : this(element, Comparer<T>.Default) { }
 
+        /// <summary>
+        /// Create tree on the base of some collection of elements. First element of the collection will be the root
+        /// </summary>
+        /// <param name="elements">Collection of the elements</param>
         public BinarySearchTree(IEnumerable<T> elements) : this(elements, Comparer<T>.Default) { }
 
+        /// <summary>
+        /// Create a tree and set the logic, how the elements in the tree will be compared
+        /// </summary>
+        /// <param name="element">Root element</param>
+        /// <param name="comparer">Logic of compare</param>
         public BinarySearchTree(T element, IComparer<T> comparer)
         {
             _comparer = comparer ?? Comparer<T>.Default;
             _top = new Node<T>(element, null, null);
         }
 
+        /// <summary>
+        /// Create tree on the base of some collection of elements and set the logic, how the elements in the tree will be compared
+        /// </summary>
+        /// <param name="elements">Collection of the elements</param>
+        /// <param name="comparer">Logic of compare</param>
         public BinarySearchTree(IEnumerable<T> elements, IComparer<T> comparer)
         {
             _comparer = comparer ?? Comparer<T>.Default;
@@ -82,8 +101,18 @@ namespace BinarySearchTreeLogic
 
         #region public methods
 
+        /// <summary>
+        /// This method determines whether the tree contains the element
+        /// </summary>
+        /// <param name="value">Element to search</param>
+        /// <returns>True if contains, otherwise false</returns>
         public bool Contains(T value) => Contains(_top, value);
 
+
+        /// <summary>
+        /// Add element in the tree
+        /// </summary>
+        /// <param name="value">Element to addition</param>
         public void Add(T value)
         {
             if (ReferenceEquals(_top, null))
@@ -96,10 +125,20 @@ namespace BinarySearchTreeLogic
             _size++;
         }
 
+        /// <summary>
+        /// Preorder method of tree bypass
+        /// </summary>
         public IEnumerable<T> TraversePreorder() => TraversePreorder(_top);
 
+        /// <summary>
+        /// Inorder method of tree bypass
+        /// </summary>
         public IEnumerable<T> TraverseInorder() => TraverseInorder(_top);
 
+        /// <summary>
+        /// Postorder method of tree bypass
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<T> TraversePostorder() => TraversePostorder(_top);
 
         #endregion

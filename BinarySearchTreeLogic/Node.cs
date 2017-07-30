@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BinarySearchTreeLogic
+﻿namespace BinarySearchTreeLogic
 {
     internal sealed class Node<T>
     {
