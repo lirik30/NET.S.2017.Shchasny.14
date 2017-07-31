@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace BinarySearchTreeLogic
 {
@@ -41,6 +43,8 @@ namespace BinarySearchTreeLogic
         public BinarySearchTree(T element, IComparer<T> comparer)
         {
             _comparer = comparer ?? Comparer<T>.Default;
+            ValidateComparer();
+
             _top = new Node<T>(element, null, null);
         }
 
@@ -52,6 +56,8 @@ namespace BinarySearchTreeLogic
         public BinarySearchTree(IEnumerable<T> elements, IComparer<T> comparer)
         {
             _comparer = comparer ?? Comparer<T>.Default;
+            ValidateComparer();
+
             foreach (var elem in elements)
                 Add(elem);
         }
@@ -144,6 +150,18 @@ namespace BinarySearchTreeLogic
         #endregion
 
         #region private methods
+        
+        private void ValidateComparer()
+        {
+            try
+            {
+                _comparer.Compare(default(T), default(T));
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"{typeof(T)} doesn't has default comparer", ex);
+            }
+        }
 
         private bool Contains(Node<T> node, T value)
         {
