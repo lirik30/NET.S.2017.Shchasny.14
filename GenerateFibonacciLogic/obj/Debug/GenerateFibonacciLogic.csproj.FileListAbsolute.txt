@@ -3,5 +3,3 @@ c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\Gene
 c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\GenerateFibonacciLogic\obj\Debug\GenerateFibonacciLogic.csprojResolveAssemblyReference.cache
 c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\GenerateFibonacciLogic\obj\Debug\GenerateFibonacciLogic.dll
 c:\users\kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\GenerateFibonacciLogic\obj\Debug\GenerateFibonacciLogic.pdb
-C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\GenerateFibonacciLogic\bin\Debug\GenerateFibonacciLogic.dll.CodeAnalysisLog.xml
-C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\GenerateFibonacciLogic\bin\Debug\GenerateFibonacciLogic.dll.lastcodeanalysissucceeded
