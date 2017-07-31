@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +54,10 @@
     <ProjectReference Include="..\BinarySearchTreeLogic\BinarySearchTreeLogic.csproj">
       <Project>{111c080b-b33f-404f-a716-c93dd99be0e0}</Project>
       <Name>BinarySearchTreeLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GenerateFibonacciLogic\GenerateFibonacciLogic.csproj">
+      <Project>{77907045-3f46-4441-9e18-60b38ee74452}</Project>
+      <Name>GenerateFibonacciLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Numerics;
 using System.Collections.Generic;
 using BinarySearchTreeLogic;
 using BookLogic;
+using static GenerateFibonacciLogic.Fibonacci;
 
 namespace ConsoleUI
 {
@@ -47,17 +49,30 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            TreeTest();
+
+            Console.ReadKey();
+        }
+
+        private static void FibonacciTest()
+        {
+            foreach (var number in GenerateFibonacci(125))
+            {
+                Console.WriteLine(number);
+            }
+        }
+
+        private static void TreeTest()
+        {
             var intTree = IntInitializer();
             var dblTree = StringInitializer();
-            var bookTree = BookInitializer();
+           var bookTree = BookInitializer();
             var pointTree = PointInitializer();
 
             TraverseTest(intTree);
             TraverseTest(dblTree);
             TraverseTest(bookTree);
             TraverseTest(pointTree);
-
-            Console.ReadKey();
         }
 
         private static void TraverseTest<T>(BinarySearchTree<T> tree)
@@ -84,11 +99,12 @@ namespace ConsoleUI
 
         private static BinarySearchTree<Book> BookInitializer()
         {
-            return new BinarySearchTree<Book>(new[]{
-                    new Book(null, null, null, 1000),
-                    new Book(null, null, null, 2014),
-                    new Book(null, null, null, 1344),
-                    new Book(null, null, null, 443)},
+            return new BinarySearchTree<Book>(new[]
+            {
+                    new Book(null, "A", null, 1000),
+                    new Book(null, "X", null, 2014),
+                    new Book(null, "C", null, 1344),
+                    new Book(null, "B", null, 443)},
                 new BookComparer());
         }
 
@@ -98,7 +114,7 @@ namespace ConsoleUI
                     new Point2D(18, 10),
                     new Point2D(22, 60),
                     new Point2D(2, 2),
-                    new Point2D(15, 41)},
+                    new Point2D(15, 41)},//);//,
                 new Point2DComparer());
         }
         #endregion
