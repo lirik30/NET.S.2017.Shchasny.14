@@ -11,13 +11,14 @@ namespace SetLogic
     /// Generalized class-collection Set
     /// </summary>
     /// <typeparam name="T">Variable of reference type with comparison semantics by value</typeparam>
-    public class Set<T> : IEnumerable<T> where T : class, IEquatable<T>
+    public class Set<T> : IEnumerable<T> where T : class
     {
         #region private fields
         
         private Node<T> _startSentinel;
         private Node<T> _endSentinel;
         private int _size;
+        private IEqualityComparer<T> _eqComparer;
         #endregion
 
         #region properties
@@ -43,7 +44,7 @@ namespace SetLogic
                 throw new ArgumentNullException($"{nameof(valueToSearch)} must be not null");
 
             for (var i = FirstNode; i.Next != null; i = i.Next)
-                if (valueToSearch.Equals(i.Value))
+                if(_eqComparer.Equals(valueToSearch, i.Value))
                     return i;
             return null;
         }
@@ -68,8 +69,15 @@ namespace SetLogic
         /// <summary>
         /// Create empty set
         /// </summary>
-        public Set()
+        public Set() : this(EqualityComparer<T>.Default) {}
+
+        /// <summary>
+        /// Create empty set with implementation of equality relationship
+        /// </summary>
+        /// <param name="eqComparer"></param>
+        public Set(IEqualityComparer<T> eqComparer)
         {
+            _eqComparer = eqComparer;
             Initialization();
         }
 
@@ -77,13 +85,17 @@ namespace SetLogic
         /// Create set from any other collection
         /// </summary>
         /// <param name="collection"></param>
-        public Set(IEnumerable<T> collection)
+        public Set(IEnumerable<T> collection) : this(collection, EqualityComparer<T>.Default) { }
+
+        public Set(IEnumerable<T> collection, IEqualityComparer<T> eqComparer)
         {
+            _eqComparer = eqComparer;
             Initialization();
 
             foreach (T value in collection)
                 Add(value);
         }
+
         #endregion
 
         #region public methods

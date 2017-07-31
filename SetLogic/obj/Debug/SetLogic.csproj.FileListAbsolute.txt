@@ -3,5 +3,3 @@ C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\SetL
 C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\SetLogic\bin\Debug\SetLogic.pdb
 C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\SetLogic\obj\Debug\SetLogic.dll
 C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\SetLogic\obj\Debug\SetLogic.pdb
-C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\SetLogic\bin\Debug\SetLogic.dll.CodeAnalysisLog.xml
-C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\SetLogic\bin\Debug\SetLogic.dll.lastcodeanalysissucceeded
