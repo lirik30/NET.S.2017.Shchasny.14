@@ -90,8 +90,15 @@ namespace MatrixLogic
             for(int i = 0; i < result.RowsCount; i++)
                 for (int j = 0; j < result.ColumnsCount; j++)
                 {
-                    T elem = Add(lhs.GetElement(i, j), rhs.GetElement(i, j));
-                    result.SetElement(elem, i, j);
+                    try
+                    {
+                        T elem = Add(lhs.GetElement(i, j), rhs.GetElement(i, j));
+                        result.SetElement(elem, i, j);
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        throw new NotSupportedException($"Addittion of elements of type {typeof(T)} not supported", ex);
+                    }
                 }
             return result;
         }
