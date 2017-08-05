@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace BinarySearchTreeLogic
 {
@@ -27,13 +28,13 @@ namespace BinarySearchTreeLogic
         /// Create root of the tree
         /// </summary>
         /// <param name="element">Root element</param>
-        public BinarySearchTree(T element) : this(element, Comparer<T>.Default) { }
+        public BinarySearchTree(T element) : this(element, null) { }
 
         /// <summary>
         /// Create tree on the base of some collection of elements. First element of the collection will be the root
         /// </summary>
         /// <param name="elements">Collection of the elements</param>
-        public BinarySearchTree(IEnumerable<T> elements) : this(elements, Comparer<T>.Default) { }
+        public BinarySearchTree(IEnumerable<T> elements) : this(elements, null) { }
 
         /// <summary>
         /// Create a tree and set the logic, how the elements in the tree will be compared
@@ -42,9 +43,10 @@ namespace BinarySearchTreeLogic
         /// <param name="comparer">Logic of compare</param>
         public BinarySearchTree(T element, IComparer<T> comparer)
         {
-            _comparer = comparer ?? Comparer<T>.Default;
-            ValidateComparer();
+            if (ReferenceEquals(comparer, null))
+                ValidateComparer();
 
+            _comparer = comparer ?? Comparer<T>.Default;
             _top = new Node<T>(element, null, null);
         }
 
@@ -55,9 +57,10 @@ namespace BinarySearchTreeLogic
         /// <param name="comparer">Logic of compare</param>
         public BinarySearchTree(IEnumerable<T> elements, IComparer<T> comparer)
         {
-            _comparer = comparer ?? Comparer<T>.Default;
-            ValidateComparer();
+            if(ReferenceEquals(comparer, null))
+                ValidateComparer();
 
+            _comparer = comparer ?? Comparer<T>.Default;
             foreach (var elem in elements)
                 Add(elem);
         }
@@ -153,14 +156,11 @@ namespace BinarySearchTreeLogic
         
         private void ValidateComparer()
         {
-            try
-            {
-                _comparer.Compare(default(T), default(T));
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException($"{typeof(T)} doesn't has default comparer", ex);
-            }
+            Console.WriteLine($"Check for {typeof(T)}");
+            var interfacesOfT = typeof(T).GetInterfaces();
+            if(!(interfacesOfT.Contains(typeof(IComparer<T>)) || interfacesOfT.Contains(typeof(IComparer)) || 
+                    interfacesOfT.Contains(typeof(IComparable<T>)) || interfacesOfT.Contains(typeof(IComparable))))
+                throw new InvalidOperationException($"{typeof(T)} doesn't has default comparer");
         }
 
         private bool Contains(Node<T> node, T value)
