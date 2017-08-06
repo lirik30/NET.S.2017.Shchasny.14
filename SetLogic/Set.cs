@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,149 +16,160 @@ namespace SetLogic
     public class Set<T> : IEnumerable<T> where T : class
     {
         #region private fields
-        
-        private Node<T> _startSentinel;
-        private Node<T> _endSentinel;
+
+        private int _bucketsCount = 100;
+        private Node<T>[] _buckets;
         private int _size;
-        private IEqualityComparer<T> _eqComparer;
+        private readonly IEqualityComparer<T> _eqComparer;
+        private readonly IComparer<T> _comparer;
         #endregion
 
         #region properties
 
         public int Count => _size;
-        private Node<T> FirstNode => _startSentinel.Next;
-        private Node<T> LastNode => _endSentinel.Prev;
         #endregion
-
-        #region private methods
-
-        private void Initialization()
-        {
-            _startSentinel = new Node<T>();
-            _endSentinel = new Node<T>();
-            _startSentinel.Next = _endSentinel;
-            _endSentinel.Prev = _startSentinel;
-        }
-
-        private Node<T> Search(T valueToSearch)
-        {
-            if (ReferenceEquals(valueToSearch, null))
-                throw new ArgumentNullException($"{nameof(valueToSearch)} must be not null");
-
-            for (var i = FirstNode; i.Next != null; i = i.Next)
-                if(_eqComparer.Equals(valueToSearch, i.Value))
-                    return i;
-            return null;
-        }
-
-        private void Add(T valueToAdd, Node<T> addAfterThat)
-        {
-            if (ReferenceEquals(valueToAdd, null))
-                throw new ArgumentNullException($"{nameof(valueToAdd)} must be not null");
-
-            if (ReferenceEquals(addAfterThat, null))
-                throw new InvalidOperationException();
-
-            var toAdd = new Node<T>(valueToAdd, addAfterThat.Next, addAfterThat);
-            addAfterThat.Next.Prev = toAdd;
-            addAfterThat.Next = toAdd;
-            _size++;
-        }
-        #endregion
-
+        
         #region ctors
 
-        /// <summary>
-        /// Create empty set
-        /// </summary>
-        public Set() : this(EqualityComparer<T>.Default) {}
+        public Set() : this(EqualityComparer<T>.Default, Comparer<T>.Default) { }
 
-        /// <summary>
-        /// Create empty set with implementation of equality relationship
-        /// </summary>
-        /// <param name="eqComparer"></param>
-        public Set(IEqualityComparer<T> eqComparer)
+        public Set(IEqualityComparer<T> eqComparer) : this(eqComparer, Comparer<T>.Default) { }
+
+        public Set(IComparer<T> comparer) : this(EqualityComparer<T>.Default, comparer) { }
+
+        public Set(IEqualityComparer<T> eqComparer, IComparer<T> comparer)
         {
-            _eqComparer = eqComparer;
+            _eqComparer = eqComparer ?? EqualityComparer<T>.Default;
+
+            if (ReferenceEquals(comparer, null))
+                ValidateComparer();
+            _comparer = comparer ?? Comparer<T>.Default;
+            
             Initialization();
         }
 
-        /// <summary>
-        /// Create set from any other collection
-        /// </summary>
-        /// <param name="collection"></param>
-        public Set(IEnumerable<T> collection) : this(collection, EqualityComparer<T>.Default) { }
+        public Set(IEnumerable<T> collection) : this(collection, EqualityComparer<T>.Default, Comparer<T>.Default) { }
 
-        public Set(IEnumerable<T> collection, IEqualityComparer<T> eqComparer)
+        public Set(IEnumerable<T> collection, IEqualityComparer<T> eqComparer) : this(collection, eqComparer, Comparer<T>.Default) { }
+
+        public Set(IEnumerable<T> collection, IComparer<T> comparer) : this(collection, EqualityComparer<T>.Default, comparer) { }
+
+        public Set(IEnumerable<T> collection, IEqualityComparer<T> eqComparer, IComparer<T> comparer)
         {
-            _eqComparer = eqComparer;
+            _eqComparer = eqComparer ?? EqualityComparer<T>.Default;
+
+            if (ReferenceEquals(comparer, null))
+                ValidateComparer();
+            _comparer = comparer ?? Comparer<T>.Default;
+
             Initialization();
 
-            foreach (T value in collection)
+            foreach (var value in collection)
                 Add(value);
         }
-
         #endregion
 
         #region public methods
 
-        /// <summary>
-        /// Add element in the ending of the set
-        /// </summary>
-        /// <param name="value">Element for adding</param>
-        public void Add(T value) => Add(value, LastNode);
-
-        /// <summary>
-        /// Add element after any other element(if it exists) in the set
-        /// </summary>
-        /// <param name="valueToSearch">Insert after that element</param>
-        /// <param name="valueToAdd">Element for adding</param>
-        public void AddAfter(T valueToSearch, T valueToAdd)
+        public void Add(T value)
         {
-            var addAfterThat = Search(valueToSearch);
-            Add(valueToAdd, addAfterThat);
+            if (Contains(value))
+                throw new InvalidOperationException("Set contains the same value");
+            _size++;
+            Add(value, _buckets[Math.Abs(value.GetHashCode() % _bucketsCount)]);
         }
 
-        /// <summary>
-        /// Add element before any other element(if it exists) in the set
-        /// </summary>
-        /// <param name="valueToSearch">Insert before that element</param>
-        /// <param name="valueToAdd">Element for adding</param>
-        public void AddBefore(T valueToSearch, T valueToAdd)
+        public bool Contains(T value)
         {
-            var addBeforeThat = Search(valueToSearch);
-            Add(valueToAdd, addBeforeThat.Prev);
+            for (var i = _buckets[Math.Abs(value.GetHashCode() % _bucketsCount)].Next; i != null; i = i.Next)
+            {
+                if (_comparer.Compare(value, i.Value) > 0)
+                    return false;
+                if (_eqComparer.Equals(i.Value, value))
+                    return true;
+            }
+            return false;
         }
 
-        /// <summary>
-        /// Add element in the beginning of the set
-        /// </summary>
-        /// <param name="value">Element for adding</param>
-        public void AddInTheBeginning(T value) => Add(value, _startSentinel);
+        public Set<T> Intersection(IEnumerable<T> collection)
+        {
+            var newSet = new Set<T>();
+            foreach (var element in collection)
+            {
+                if (Contains(element))
+                    newSet.Add(element);
+            }
 
-        /// <summary>
-        /// Remove element in the set, if it exists
-        /// </summary>
-        /// <param name="value">Element for removing</param>
+            return newSet;
+        }
+
         public void Remove(T value)
         {
-            var toDelete = Search(value);
+            if (!Contains(value))
+                throw new InvalidOperationException("Set doesn't contain such element");
 
-            if (toDelete == null)
-                throw new InvalidOperationException();
-
-            toDelete.Prev.Next = toDelete.Next;
-            toDelete.Next.Prev = toDelete.Prev;
+            var nodeBefore = Search(value);
+            nodeBefore.Next = nodeBefore.Next.Next;
             _size--;
+        }
+
+        public void UnionWith(IEnumerable<T> collection)
+        {
+            foreach (var element in collection)
+            {
+                if (Contains(element))
+                    continue;
+                Add(element);
+            }
         }
         #endregion
 
-        #region GetEnumeratorы
+        #region private methods
 
+        private void Add(T value, Node<T> node)
+        {
+            while (node.Next != null && _comparer.Compare(node.Next.Value, value) < 0)
+                node = node.Next;
+
+            node.Next = new Node<T>(value, node.Next);
+        }
+
+        private void Initialization()
+        {
+            _buckets = new Node<T>[_bucketsCount];
+            for(int i = 0; i < _bucketsCount; i++)
+                _buckets[i] = new Node<T>();
+        }
+
+
+        private Node<T> Search(T value)
+        {
+            for (var i = _buckets[Math.Abs(value.GetHashCode() % _bucketsCount)]; i != null; i = i.Next)
+            {
+                if (_eqComparer.Equals(i.Next.Value, value))
+                    return i;
+            }
+            return null;
+        }
+
+
+        private void ValidateComparer()
+        {
+            Console.WriteLine($"Check for {typeof(T)}");
+            var interfacesOfT = typeof(T).GetInterfaces();
+            if (!(interfacesOfT.Contains(typeof(IComparer<T>)) || interfacesOfT.Contains(typeof(IComparer)) ||
+                  interfacesOfT.Contains(typeof(IComparable<T>)) || interfacesOfT.Contains(typeof(IComparable))))
+                throw new InvalidOperationException($"{typeof(T)} doesn't has default comparer");
+        }
+        #endregion
+
+        #region IEnumerable/Ienumerable<T> methods
         public IEnumerator<T> GetEnumerator()
         {
-            for (var i = FirstNode; i.Next != null; i = i.Next)
-                yield return i.Value;
+            for (int i = 0; i < _bucketsCount; i++)
+                for (var node = _buckets[i]; node != null; node = node.Next)
+                    if (node.Value != null)
+                        yield return node.Value;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
