@@ -41,13 +41,13 @@ namespace DoubleLinkedListLogic
         #region public methods
 
         /// <summary>
-        /// Add element in the ending of the set
+        /// Add element in the ending of the list
         /// </summary>
         /// <param name="value">Element for adding</param>
         public void Add(T value) => Add(value, LastNode);
 
         /// <summary>
-        /// Add element after any other element(if it exists) in the set
+        /// Add element after any other element(if it exists) in the list
         /// </summary>
         /// <param name="valueToSearch">Insert after that element</param>
         /// <param name="valueToAdd">Element for adding</param>
@@ -58,7 +58,7 @@ namespace DoubleLinkedListLogic
         }
 
         /// <summary>
-        /// Add element before any other element(if it exists) in the set
+        /// Add element before any other element(if it exists) in the list
         /// </summary>
         /// <param name="valueToSearch">Insert before that element</param>
         /// <param name="valueToAdd">Element for adding</param>
@@ -69,13 +69,13 @@ namespace DoubleLinkedListLogic
         }
 
         /// <summary>
-        /// Add element in the beginning of the set
+        /// Add element in the beginning of the list
         /// </summary>
         /// <param name="value">Element for adding</param>
         public void AddInTheBeginning(T value) => Add(value, _startSentinel);
 
         /// <summary>
-        /// Remove element in the set, if it exists
+        /// Remove element in the list, if it exists
         /// </summary>
         /// <param name="value">Element for removing</param>
         public void Remove(T value)

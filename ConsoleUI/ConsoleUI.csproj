@@ -59,6 +59,10 @@
       <Project>{77907045-3f46-4441-9e18-60b38ee74452}</Project>
       <Name>GenerateFibonacciLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SetLogic\SetLogic.csproj">
+      <Project>{9504d400-ce0b-485a-be5f-f022877b398b}</Project>
+      <Name>SetLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

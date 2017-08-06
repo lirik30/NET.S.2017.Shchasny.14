@@ -8,3 +8,5 @@ C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\Cons
 C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\BinarySearchTreeLogic.pdb
 C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\GenerateFibonacciLogic.dll
 C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\GenerateFibonacciLogic.pdb
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\SetLogic.dll
+C:\Users\Kiril\documents\visual studio 2017\Projects\NET.S.2017.Shchasny.14\ConsoleUI\bin\Debug\SetLogic.pdb

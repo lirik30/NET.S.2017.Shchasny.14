@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BinarySearchTreeLogic;
 using BookLogic;
 using static GenerateFibonacciLogic.Fibonacci;
+using SetLogic;
 
 namespace ConsoleUI
 {
@@ -49,9 +50,32 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            TreeTest();
-
+            
             Console.ReadKey();
+        }
+
+        private static void SetTest()
+        {
+            var set = new Set<string> {"A", "Add", "Bet", "M", "ER", "console"};
+
+            //set.Add("A"); //throws exception
+            Console.WriteLine(set.Contains("ER"));
+            set.Remove("ER");
+            Console.WriteLine(set.Contains("ER"));
+            Console.WriteLine(set.Count);
+
+            set.UnionWith(new[] { "A", "B", "C", "D", "F", "G", "H", "I" });
+            foreach (var elem in set)
+            {
+                Console.WriteLine(elem);
+            }
+            //_____________________
+            var set2 = set.Intersection(new[] { "A", "B", "K", "M", "T", "I" });
+            Console.WriteLine();
+            foreach (var elem in set2)
+            {
+                Console.WriteLine(elem);
+            }
         }
 
         private static void FibonacciTest()
@@ -104,8 +128,8 @@ namespace ConsoleUI
                     new Book(null, "A", null, 1000),
                     new Book(null, "X", null, 2014),
                     new Book(null, "C", null, 1344),
-                    new Book(null, "B", null, 443)},
-                new BookComparer());
+                    new Book(null, "B", null, 443)});//,
+            //new BookComparer());
         }
 
         private static BinarySearchTree<Point2D> PointInitializer()
@@ -114,8 +138,8 @@ namespace ConsoleUI
                     new Point2D(18, 10),
                     new Point2D(22, 60),
                     new Point2D(2, 2),
-                    new Point2D(15, 41)},//);//,
-                new Point2DComparer());
+                    new Point2D(15, 41)});//,
+                //new Point2DComparer());
         }
         #endregion
     }
